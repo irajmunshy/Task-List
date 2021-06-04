@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     cross: {
-        fontSize: 20,
+        fontSize: 25,
         marginBottom: 5,
         fontWeight: 'bold',
         color: '#0932e6'

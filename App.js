@@ -29,7 +29,7 @@ export default function App() {
       <View style={styles.taskPart}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Today's Tasks</Text>
-          <Text style={styles.counter}>Counter: {counter}</Text>
+          <Text style={styles.counter}>Total Tasks: {counter}</Text>
         </View>
 
         <View style={styles.taskList}>
