@@ -1,15 +1,17 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
-export default function Task(props) {
+export default function Task({task, handleDeleteTask}) {
+    const {taskName, key} = task;
+    
     return (
         <View style={styles.taskBox}>
             <View style={styles.taskLeft}>
                 <TouchableOpacity style={styles.square}></TouchableOpacity>
-                <Text style={styles.taskField}>{props.text}</Text>
+                <Text style={styles.taskField}>{taskName}</Text>
             </View>
             <View>
-                <Text style={styles.cross}>x</Text>
+                <Text style={styles.cross} onPress={() => handleDeleteTask(key)}>x</Text>
             </View>
         </View>
     )

@@ -4,23 +4,43 @@ import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableO
 import Task from './component/Task/Task';
 
 export default function App() {
-
   const [task, setTask] = useState();
-
   const [taskItems, setTaskItems] = useState([]);
+  const [counter, setCounter] = useState(0);
 
   const handleAddTask = () => {
-    setTaskItems([...taskItems, task])
+    setCounter(counter + 1);
+    const taskInfo = {
+      taskName: task,
+      key: counter,
+    }
+    setTaskItems([...taskItems, taskInfo]);
     setTask(null);
+  }
+
+  const handleDeleteTask = (key) => {
+    setCounter(counter - 1);
+    const filterTaskItems = taskItems.filter(task => task.key !== key);
+    setTaskItems(filterTaskItems);
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.taskPart}>
-        <Text style={styles.title}>Today's Tasks</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Today's Tasks</Text>
+          <Text style={styles.counter}>Counter: {counter}</Text>
+        </View>
+
         <View style={styles.taskList}>
           {
-            taskItems.map( eachTask => <Task text={eachTask}></Task>)
+            taskItems.map( eachTask => 
+              <Task 
+                task={eachTask}
+                handleDeleteTask={handleDeleteTask}
+                key={eachTask.key}
+              ></Task>
+            )
           }
         </View>
       </View>
@@ -44,13 +64,23 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#7ea6e6',
   },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },  
   taskPart: {
     paddingTop: 80,
-    paddingHorizontal: 20
+    paddingHorizontal: 40
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    paddingLeft: 80,
+  },
+  counter: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    paddingRight: 40,
   },
   taskList: {
     marginTop: 30
